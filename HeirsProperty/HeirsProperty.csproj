@@ -52,17 +52,8 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="HPTestForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="HPTestForm.Designer.cs">
-      <DependentUpon>HPTestForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="HPTestForm.resx">
-      <DependentUpon>HPTestForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -84,12 +75,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HeirsPropertyBusinessLogic\HeirsPropertyBusinessLogic.csproj">
-      <Project>{a763ca1a-9374-45df-be05-727d2a0d920d}</Project>
-      <Name>HeirsPropertyBusinessLogic</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
