@@ -81,7 +81,7 @@ namespace HeirsProperty
             string evName = this.txtEventName.Text.Trim();
             this.CheckEventName(evName);
             string evPriceStr = txtEventPrice.Text.Trim();
-            Decimal evPriceD = this.CheckConvert(evPriceStr);
+            Decimal evPriceD = this.CheckConvertPrice(evPriceStr);
             string evEventCapacityStr = this.txtEventCapacity.Text;
             int evEventCapacityint = this.CheckConvertInt(evEventCapacityStr);
 
@@ -92,17 +92,34 @@ namespace HeirsProperty
 
         private int CheckConvertInt(string evEventCapacityStr)
         {
-            throw new NotImplementedException();
+            int anum = -1;
+            if(!int.TryParse(evEventCapacityStr,out anum))
+            {
+                MessageBox.Show($"{evEventCapacityStr} was not understood as a number");
+            }
+            return anum;
         }
 
         private void CheckEventName(string evName)
         {
-            throw new NotImplementedException();
+            if(evName.Length > 150)
+            {
+                MessageBox.Show("This Name is too Long");
+            }
         }
 
-        private decimal CheckConvert(string evPriceStr)
+        private decimal CheckConvertPrice(string evPriceStr)
         {
-            throw new NotImplementedException();
+            Decimal cvtPrice =-1.00M;
+            if(Decimal.TryParse(evPriceStr, out cvtPrice))
+            {
+                return cvtPrice;
+            }
+            else
+            {
+                MessageBox.Show($"{evPriceStr}:That was not understood as an Event Price");
+                return -1.00M;
+            }
         }
     }
 }

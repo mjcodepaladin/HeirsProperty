@@ -25,7 +25,15 @@ namespace HeirsPropertyDataLayer.Models
         {
             get
             {
-                return (this.EventDateDetermination > 0);
+               if(this.EventDateDetermination > 0)
+                {
+                    return true;
+
+                }
+               else
+                { 
+                    return false; 
+                }
             }
             set
             {
@@ -48,7 +56,7 @@ namespace HeirsPropertyDataLayer.Models
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = "SELECT EventID,EventName,EventPrice,EventDate,EventDateDetermination,EventCapacity FROM EventTable ORDER BY EventID";
             List<Event> events = new List<Event>();
-            Event myTopEvent = new Event();
+            Event mySingleEvent = new Event();
             List<Event> myretEvents = null;
 
 
@@ -60,6 +68,7 @@ namespace HeirsPropertyDataLayer.Models
                 SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
                 using (DbConnection dconnection = dbFactory.CreateConnection())
                 {
+
                     if (dconnection != null)
                     {
                         dconnection.ConnectionString = constring;
@@ -72,29 +81,30 @@ namespace HeirsPropertyDataLayer.Models
 
                             while (myReader.Read())
                             {
-                                myTopEvent = new Event();
-                                myTopEvent.EventID = int.Parse(myReader["EventID"].ToString());
-                                myTopEvent.EventName = myReader["EventName"].ToString();
-                                myTopEvent.EventDate = DateTime.Parse(myReader["EventDate"].ToString());
-                                myTopEvent.EventPrice = Decimal.Parse(myReader["EventPrice"].ToString());
+                                mySingleEvent = new Event();
+                               mySingleEvent.EventID = int.Parse(myReader["EventID"].ToString());
+                               mySingleEvent.EventName = myReader["EventName"].ToString();
+                               mySingleEvent.EventDate = DateTime.Parse(myReader["EventDate"].ToString());
+                               mySingleEvent.EventPrice = Decimal.Parse(myReader["EventPrice"].ToString());
                                 if (myReader.IsDBNull(5))
                                 {
-                                    myTopEvent.EventCapacity = -1;
+                                   mySingleEvent.EventCapacity = -1;
                                 }
                                 else
                                 {
-                                    myTopEvent.EventCapacity = int.Parse(myReader["EventCapacity"].ToString());
+                                   mySingleEvent.EventCapacity = int.Parse(myReader["EventCapacity"].ToString());
                                 }
-                                myTopEvent.EventDateDetermination = int.Parse(myReader["EventDateDetermination"].ToString());
+                               mySingleEvent.EventDateDetermination = int.Parse(myReader["EventDateDetermination"].ToString());
 
 
-                                events.Add(myTopEvent);
-                                if (events != null && events.Count > 0)
-                                {
-
-                                    myretEvents = events;
-                                }
                             }
+                            events.Add(mySingleEvent);
+                            if (events != null && events.Count > 0)
+                            {
+
+                                myretEvents = events;
+                            }
+
                         }
                     }
                 }
@@ -198,8 +208,8 @@ namespace HeirsPropertyDataLayer.Models
             string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"UPDATE EventTable (SET EventName={inevent.EventName},EventPrice={inevent.EventPrice},EventDate={inevent.EventDate},EventDateDetermination={inevent.EventDateDetermination},EventCapacity={inevent.EventCapacity} FROM EventTable WHERE EventID={inevent.EventID}";
-            List<Event> events = new List<Event>();
-            Event myTopEvent = new Event();
+            //List<Event> events = new List<Event>();
+            //Event myTopEvent = new Event();
 
 
 
@@ -249,10 +259,8 @@ namespace HeirsPropertyDataLayer.Models
             //This creates an event however due to autonumbering once its created we have to select to find out what its newid is IF we need it
             Event retEvent = inevent;
             //INSERT NEW EVENT SELECT IT BACk
+            
 
-
-
-            retEvent.EventID = GetEventByName(inevent.EventName).EventID;
 
             string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
@@ -280,6 +288,8 @@ namespace HeirsPropertyDataLayer.Models
                         {
                             if (myresp > 0)
                             {
+                                retEvent.EventID = GetEventByName(inevent.EventName).EventID;
+
                                 return retEvent;
                             }
                             //            string sqlstring = $"SELECT EventID,EventName,EventPrice,EventDate,EventDateDetermination,EventCapacity FROM EventTable WHERE EventName='{inName}'";
