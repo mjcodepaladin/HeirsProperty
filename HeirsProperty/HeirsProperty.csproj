@@ -46,22 +46,50 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventCreation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventCreation.Designer.cs">
+      <DependentUpon>EventCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EventDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventDashboard.Designer.cs">
+      <DependentUpon>EventDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HPropFrontEngine.cs" />
     <Compile Include="HPTestForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="HPTestForm.Designer.cs">
       <DependentUpon>HPTestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="MainDashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainDashboard.Designer.cs">
+      <DependentUpon>MainDashboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="EventCreation.resx">
+      <DependentUpon>EventCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventDashboard.resx">
+      <DependentUpon>EventDashboard.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HPTestForm.resx">
       <DependentUpon>HPTestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainDashboard.resx">
+      <DependentUpon>MainDashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -89,6 +117,10 @@
     <ProjectReference Include="..\HeirsPropertyBusinessLogic\HeirsPropertyBusinessLogic.csproj">
       <Project>{a763ca1a-9374-45df-be05-727d2a0d920d}</Project>
       <Name>HeirsPropertyBusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HeirsPropertyDataLayer\HeirsPropertyDataLayer.csproj">
+      <Project>{322b487d-528f-43ca-9dc9-143de1f7eff1}</Project>
+      <Name>HeirsPropertyDataLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
