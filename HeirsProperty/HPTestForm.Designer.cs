@@ -68,6 +68,7 @@
             this.Controls.Add(this.txtOutputBox);
             this.Name = "HPTestForm";
             this.Text = "HPTestForm";
+            this.Load += new System.EventHandler(this.HPTestForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

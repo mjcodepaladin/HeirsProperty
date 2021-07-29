@@ -32,6 +32,7 @@
             this.btnDonorInvDash = new System.Windows.Forms.Button();
             this.btnDonationDash = new System.Windows.Forms.Button();
             this.btnStatisticsDash = new System.Windows.Forms.Button();
+            this.btnQuickTest = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnEvents
@@ -82,11 +83,24 @@
             this.btnStatisticsDash.UseVisualStyleBackColor = true;
             this.btnStatisticsDash.Click += new System.EventHandler(this.btnStatisticsDash_Click);
             // 
+            // btnQuickTest
+            // 
+            this.btnQuickTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnQuickTest.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.btnQuickTest.Location = new System.Drawing.Point(224, 200);
+            this.btnQuickTest.Name = "btnQuickTest";
+            this.btnQuickTest.Size = new System.Drawing.Size(107, 23);
+            this.btnQuickTest.TabIndex = 8;
+            this.btnQuickTest.Text = "Quick Test **";
+            this.btnQuickTest.UseVisualStyleBackColor = true;
+            this.btnQuickTest.Click += new System.EventHandler(this.btnQuickTest_Click);
+            // 
             // MainDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnQuickTest);
             this.Controls.Add(this.btnStatisticsDash);
             this.Controls.Add(this.btnDonationDash);
             this.Controls.Add(this.btnDonorInvDash);
@@ -103,5 +117,6 @@
         private System.Windows.Forms.Button btnDonorInvDash;
         private System.Windows.Forms.Button btnDonationDash;
         private System.Windows.Forms.Button btnStatisticsDash;
+        private System.Windows.Forms.Button btnQuickTest;
     }
 }

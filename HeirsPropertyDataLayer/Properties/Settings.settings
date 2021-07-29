@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=COLDIRON\COLDBLADE;Initial Catalog=HeirsPropertyDB;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -39,5 +39,11 @@ namespace HeirsProperty
 
             HPropFrontEngine.NavigateStatisticsDash();
         }
+
+        private void btnQuickTest_Click(object sender, EventArgs e)
+        {
+            HPTestForm testForm = new HPTestForm();
+            testForm.Show();
+        }
     }
 }

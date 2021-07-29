@@ -259,10 +259,13 @@ namespace HeirsPropertyDataLayer.Models
             //This creates an event however due to autonumbering once its created we have to select to find out what its newid is IF we need it
             Event retEvent = inevent;
             //INSERT NEW EVENT SELECT IT BACk
-            
 
+            ConnectionStringSettingsCollection settings = ConfigurationManager.ConnectionStrings;
+            var stuff = ConfigurationManager.ConnectionStrings;
+            ConfigurationManager.ConnectionStrings.Clear();
+            var otherstuff = ConfigurationManager.AppSettings.AllKeys;
 
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsPropertyDBConnectionString"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"INSERT INTO  EventTable  (EventName, EventPrice, EventCapacity, EventDateDetermination, EventDate) VALUES({inevent.EventName},{inevent.EventPrice},{inevent.EventCapacity},{inevent.EventDateDetermination},{inevent.EventDate})";
             List<Event> events = new List<Event>();
@@ -275,12 +278,12 @@ namespace HeirsPropertyDataLayer.Models
                 Event myretevent = null;
 
 
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
-                using (DbConnection dconnection = dbFactory.CreateConnection())
+                //SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                using (SqlConnection dconnection = new SqlConnection(constring))
                 {
                     if (dconnection != null)
                     {
-                        dconnection.ConnectionString = constring;
+                        //dconnection.ConnectionString = constring;
                         dconnection.Open();
                         DbCommand myCommand = dconnection.CreateCommand();
                         myCommand.CommandText = sqlstring;
