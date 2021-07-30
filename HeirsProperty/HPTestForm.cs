@@ -52,8 +52,16 @@ namespace HeirsProperty
             {
                 retstring = TestEngine.GetSingleEvent(2);
             }
-
+           else
+            {
+                retstring = "<UNKNOWN input>";
+            }
             return retstring;
+        }
+
+        private void HPTestForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
