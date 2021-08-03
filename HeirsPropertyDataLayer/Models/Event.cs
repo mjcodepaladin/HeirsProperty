@@ -25,8 +25,7 @@ namespace HeirsPropertyDataLayer.Models
         {
             get
             {
-                return (this.EventDateDetermination > 0);//This is an error;no false choice given;
-            }
+            
                if(this.EventDateDetermination > 0)
                 {
                     return true;
@@ -34,7 +33,9 @@ namespace HeirsPropertyDataLayer.Models
                 }
                else
                 { 
-                    return false; 
+                    return false;
+                    //                return (this.EventDateDetermination > 0);//This is an error;no false choice given;
+
                 }
             }
             set
@@ -47,6 +48,8 @@ namespace HeirsPropertyDataLayer.Models
                 else
                 { this.EventDateDetermination = 0; }//false
             }
+
+
         }
         //unclear what this property does
 
