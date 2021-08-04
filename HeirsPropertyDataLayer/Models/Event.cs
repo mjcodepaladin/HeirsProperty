@@ -52,7 +52,7 @@ namespace HeirsPropertyDataLayer.Models
         public static List<Event> SelectAll()
         {
             // returns  ALL events from the EventTable regardless of criteria
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = "SELECT EventID,EventName,EventPrice,EventDate,EventDateDetermination,EventCapacity FROM EventTable ORDER BY EventID";
             List<Event> events = new List<Event>();
@@ -65,7 +65,7 @@ namespace HeirsPropertyDataLayer.Models
             {
                 //Event myretevent = null;
       
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
                 using (DbConnection dconnection = dbFactory.CreateConnection())
                 {
 
@@ -130,7 +130,7 @@ namespace HeirsPropertyDataLayer.Models
         {
 
             Event retEvent = new Event();
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"SELECT EventID,EventName,EventPrice,EventDate,EventDateDetermination,EventCapacity FROM EventTable WHERE EventID='{ineventid}'";
             List<Event> events = new List<Event>();
@@ -143,7 +143,7 @@ namespace HeirsPropertyDataLayer.Models
                 Event myretevent = null;
 
 
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
                 using (DbConnection dconnection = dbFactory.CreateConnection())
                 {
                     if (dconnection != null)
@@ -205,7 +205,7 @@ namespace HeirsPropertyDataLayer.Models
         public static bool UpdateEvent(Event inevent)
         {
 
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"UPDATE EventTable (SET EventName={inevent.EventName},EventPrice={inevent.EventPrice},EventDate={inevent.EventDate},EventDateDetermination={inevent.EventDateDetermination},EventCapacity={inevent.EventCapacity} FROM EventTable WHERE EventID={inevent.EventID}";
             //List<Event> events = new List<Event>();
@@ -218,7 +218,7 @@ namespace HeirsPropertyDataLayer.Models
                 Event myretevent = null;
 
 
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
                 using (DbConnection dconnection = dbFactory.CreateConnection())
                 {
                     if (dconnection != null)
@@ -262,12 +262,13 @@ namespace HeirsPropertyDataLayer.Models
 
             ConnectionStringSettingsCollection settings = ConfigurationManager.ConnectionStrings;
             var stuff = ConfigurationManager.ConnectionStrings;
-            ConfigurationManager.ConnectionStrings.Clear();
+            //ConfigurationManager.ConnectionStrings.Clear();
             var otherstuff = ConfigurationManager.AppSettings.AllKeys;
 
-            string constring = ConfigurationManager.ConnectionStrings["HeirsPropertyDBConnectionString"].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
+ //           constring = @"Data Source=COLDIRON\COLDBLADE;Initial Catalog=HeirsPropertyDB;Integrated Security=True";
             SqlConnection myConnection = new SqlConnection(constring);
-            string sqlstring = $"INSERT INTO  EventTable  (EventName, EventPrice, EventCapacity, EventDateDetermination, EventDate) VALUES({inevent.EventName},{inevent.EventPrice},{inevent.EventCapacity},{inevent.EventDateDetermination},{inevent.EventDate})";
+            string sqlstring = $"INSERT INTO  EventTable  (EventName, EventPrice, EventCapacity, EventDateDetermination, EventDate) VALUES('{inevent.EventName}',{inevent.EventPrice},{inevent.EventCapacity},{inevent.EventDateDetermination},'{inevent.EventDate}')";
             List<Event> events = new List<Event>();
             Event myTopEvent = new Event();
 
@@ -278,12 +279,12 @@ namespace HeirsPropertyDataLayer.Models
                 Event myretevent = null;
 
 
-                //SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
-                using (SqlConnection dconnection = new SqlConnection(constring))
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
+                using (DbConnection dconnection = dbFactory.CreateConnection())//SqlConnection dconnection = new SqlConnection(constring)
                 {
                     if (dconnection != null)
                     {
-                        //dconnection.ConnectionString = constring;
+                        dconnection.ConnectionString = constring;
                         dconnection.Open();
                         DbCommand myCommand = dconnection.CreateCommand();
                         myCommand.CommandText = sqlstring;
@@ -320,20 +321,20 @@ namespace HeirsPropertyDataLayer.Models
 
         private static Event GetEventByName(string inName)
         {
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"SELECT EventID,EventName,EventPrice,EventDate,EventDateDetermination,EventCapacity FROM EventTable WHERE EventName='{inName}'";
             List<Event> events = new List<Event>();
             Event myTopEvent = new Event();
-           
-           
-            
+            constring = @"Data Source=COLDIRON\COLDBLADE;Initial Catalog=HeirsPropertyDB;Integrated Security=True";
+
+
             try
             {
                 Event myretevent = null;
 
 
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
                 using(DbConnection dconnection = dbFactory.CreateConnection())
                 {
                     if(dconnection!=null)
@@ -392,7 +393,7 @@ namespace HeirsPropertyDataLayer.Models
         public static bool DeleteEvent(int ineventid)
         {
 
-            string constring = ConfigurationManager.ConnectionStrings[0].ConnectionString;
+            string constring = ConfigurationManager.ConnectionStrings["HeirsProperty.Properties.Settings.HPDatabase"].ConnectionString;
             SqlConnection myConnection = new SqlConnection(constring);
             string sqlstring = $"DELETE  FROM EventTable WHERE EventID={ineventid}";
             
@@ -403,7 +404,7 @@ namespace HeirsPropertyDataLayer.Models
                 Event myretevent = null;
 
 
-                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("Microsoft.Data.SqlClient");
+                SqlClientFactory dbFactory = (SqlClientFactory)DbProviderFactories.GetFactory("System.Data.SqlClient");
                 using (DbConnection dconnection = dbFactory.CreateConnection())
                 {
                     if (dconnection != null)

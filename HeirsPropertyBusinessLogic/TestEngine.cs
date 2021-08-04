@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,51 @@ namespace HeirsPropertyBusinessLogic
 
             return retMessage;
 
+        }
+
+        public static string TestLibraryKeyList()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            ConnectionStringSettingsCollection myappsettings = ConfigurationManager.ConnectionStrings;
+
+
+
+            foreach (ConnectionStringSettings acofig in myappsettings)
+            {
+                builder.AppendLine(acofig.Name);
+            }
+
+            return builder.ToString();
+        }
+
+        public static string TestAppConfigs()
+        {
+            StringBuilder builder = new StringBuilder();
+            
+            ConnectionStringSettingsCollection myappsettings = ConfigurationManager.ConnectionStrings;
+  
+           
+            
+            foreach(ConnectionStringSettings acofig in myappsettings)
+            {
+                builder.AppendLine(acofig.ConnectionString);
+            }
+
+            return builder.ToString();
+        }
+
+        public static string TestLibraryConfigs()
+        {
+
+            string[] retstring = HeirsPropertyDataLayer.DataServices.GetTestConfigurationSet();
+            StringBuilder builder = new StringBuilder();
+
+            foreach (string h in retstring)
+            {
+                builder.Append(h);
+            };
+            return builder.ToString();
         }
 
         public static string DeleteTestEvent(int v)
