@@ -45,5 +45,11 @@ namespace HeirsProperty
             HPTestForm testForm = new HPTestForm();
             testForm.Show();
         }
+
+        private void Btn_MayasQuickTest_Click(object sender, EventArgs e)
+        {
+            MayasTestForm NewTestForm = new MayasTestForm();
+            NewTestForm.Show();
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace HeirsPropertyDataLayer.Models
         {
             get
             {
-            }
+            
                if(this.EventDateDetermination > 0)
                 {
                     return true;
@@ -50,7 +50,7 @@ namespace HeirsPropertyDataLayer.Models
             }
 
 
-        }
+    }
         //unclear what this property does
 
 
